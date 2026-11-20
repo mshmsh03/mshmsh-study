@@ -1,6 +1,6 @@
 # mshmsh-study
 
-[![skills.sh](https://skills.sh/b/mshmsh03/mshmsh-study)](https://skills.sh/mshmsh03/mshmsh-study) [![Check](https://github.com/mshmsh03/mshmsh-study/actions/workflows/check.yml/badge.svg)](https://github.com/mshmsh03/mshmsh-study/actions/workflows/check.yml)
+[![Check](https://github.com/mshmsh03/mshmsh-study/actions/workflows/check.yml/badge.svg)](https://github.com/mshmsh03/mshmsh-study/actions/workflows/check.yml)
 
 A Claude skill that turns lectures, slides and notes into one interactive study page, a "lab", for the night before a quiz or exam. Every question and flashcard shows the slide it came from, so you can check anything against the lecture.
 
