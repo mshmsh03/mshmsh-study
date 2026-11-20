@@ -1,5 +1,7 @@
 # mshmsh-study
 
+[![skills.sh](https://skills.sh/b/mshmsh03/mshmsh-study)](https://skills.sh/mshmsh03/mshmsh-study) [![Check](https://github.com/mshmsh03/mshmsh-study/actions/workflows/check.yml/badge.svg)](https://github.com/mshmsh03/mshmsh-study/actions/workflows/check.yml)
+
 A Claude skill that turns lectures, slides and notes into one interactive study page, a "lab", for the night before a quiz or exam. Every question and flashcard shows the slide it came from, so you can check anything against the lecture.
 
 A lab has:
@@ -22,7 +24,7 @@ It reads PDFs, PowerPoint files with their speaker notes, photos of slides or no
 npx skills add mshmsh03/mshmsh-study
 ```
 
-Then type `/mshmsh-study`, or ask Claude to turn a lecture into a study page.
+Then type `/mshmsh-study`, or ask Claude to turn a lecture into a study page. To update, run the install command again.
 
 **Renamed:** this skill was called `study-xoshaka` until 2026-11-20. If you have the old one, remove it after installing this one so the two don't both load. In the Claude app, delete study-xoshaka. In Claude Code, run `npx skills remove study-xoshaka -g`.
 
@@ -49,6 +51,8 @@ Claude has all of this in its own workspace. To build labs elsewhere you need Py
 | `tests/sample/lab.html` | A sample lab (Operating Systems, CPU scheduling) written the way the skill says |
 | `tests/flow_test.py` | Clicks through every part of a built lab |
 | `tests/bad/` | A page full of planted mistakes the checker has to catch |
+| `CHANGELOG.md` | What changed in each version |
+| `.github/` | The tests GitHub runs on every push, and the job that builds the release zip |
 
 ## Tested
 
