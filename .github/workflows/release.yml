@@ -23,7 +23,7 @@ jobs:
       - name: Build mshmsh-study.zip
         run: |
           mkdir -p dist/mshmsh-study
-          cp SKILL.md README.md LICENSE CHANGELOG.md dist/mshmsh-study/
+          cp -r SKILL.md README.md LICENSE CHANGELOG.md assets scripts dist/mshmsh-study/
           cd dist && zip -qr mshmsh-study.zip mshmsh-study
       - name: Put it on the "latest" release
         env:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tests for mshmsh-study. Run from anywhere: python3 tests/run.py
 
-1. Copies engine.js, engine.css and check_lab.py out of SKILL.md with the skill's own command.
+1. Copies engine.js, engine.css and check_lab.py from assets/ and scripts/ with the skill's own command.
 2. Builds the sample lab the way the skill says, with the skill's own fill-in command.
 3. check_lab.py must pass the sample lab, browser check included.
 4. flow_test.py clicks through every part of the built lab.
@@ -14,7 +14,7 @@ out = root / "tests" / "out"
 shutil.rmtree(out, ignore_errors=True)
 out.mkdir(parents=True)
 skill = (root / "SKILL.md").read_text(encoding="utf-8")
-extract, inline = re.findall(r"```bash\n(.*?)```", skill, re.S)[:2]
+copy_cmd, inline = re.findall(r"```bash\n(.*?)```", skill, re.S)[:2]
 fails = []
 
 
@@ -29,10 +29,11 @@ def step(name, ok, detail=""):
         print(detail.strip()[-3000:])
 
 
-copy_code = re.search(r"<<'EOF'\n(.*?)\nEOF", extract, re.S).group(1)
-r = run("-c", copy_code, str(root / "SKILL.md"))
+r = subprocess.run(["bash", "-c", copy_cmd.replace("<skill base dir>", root.as_posix())], cwd=out, capture_output=True, text=True)
 made = all((out / f).exists() for f in ("engine.js", "engine.css", "check_lab.py"))
-step("the skill's copy command writes engine.js, engine.css and check_lab.py", r.returncode == 0 and made, r.stderr)
+step("the skill's copy command copies engine.js, engine.css and check_lab.py", r.returncode == 0 and made, r.stderr)
+
+step("SKILL.md no longer carries its own copy of the engine", "function Quiz" not in skill and "def browser_check" not in skill)
 
 shutil.copy(root / "tests" / "sample" / "lab.html", out / "index.html")
 r = run("-c", re.search(r'python3 -c "(.*)"', inline).group(1))
