@@ -119,7 +119,7 @@ Work in `<course>-ch<N>/`. Copy the engine, its stylesheet and the checker from 
 cp "<skill base dir>/assets/engine.js" "<skill base dir>/assets/engine.css" "<skill base dir>/scripts/check_lab.py" .
 ```
 
-If the skill's folder isn't on disk, get the three files from its repo with `git clone --depth 1 https://github.com/mshmsh03/mshmsh-study` and copy them from there.
+If those files aren't there, the skill was installed without its folder. Tell the student to install it again rather than writing the engine yourself.
 
 Write `index.html` from the skeleton below, with `/*ENGINE_CSS*/` inside your `<style>` and `/*ENGINE*/` as the last script. Then fill both in:
 

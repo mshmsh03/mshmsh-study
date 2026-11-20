@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1 (2026-11-20)
+
+- When the skill's files are missing, Claude asks the student to install it again instead of downloading the engine from GitHub while it works. The skill never fetches code it then runs.
+
 ## 2.1.0 (2026-11-20)
 
 SKILL.md is two thirds smaller (55 KB down to 19 KB), so the skill uses far fewer tokens each time it runs.
