@@ -34,7 +34,7 @@ Then type `/mshmsh-study`, or ask Claude to turn a lecture into a study page. To
 2. **Outline 5 to 8 topics** in the lecture's order: definitions, counts, names and dates, formulas, traps, and what the lecturer stressed.
 3. **Pick a visual** for each topic from the shape of its content.
 4. **Write the practice.** Questions have one defensible answer and real distractors, each flashcard holds one fact, and problem generators use the lecture's method and rounding.
-5. **Build one HTML page.** The engine, its stylesheet and the checker live inside SKILL.md and get copied out, so every lab runs the same tested code.
+5. **Build one HTML page.** Claude copies the engine, its stylesheet and the checker from `assets/` and `scripts/` into the lab, so every lab runs the same tested code.
 6. **Check it.** `check_lab.py` checks the data, slide coverage, answer keys and generators, then clicks through the page at phone and desktop width looking for errors and overlapping labels. A fresh agent then answers the quiz blind from the lecture, and every disagreement with the key gets fixed.
 7. **Publish** it as a page you can open on your phone.
 
@@ -46,7 +46,10 @@ Claude has all of this in its own workspace. To build labs elsewhere you need Py
 
 | Path | What it is |
 | --- | --- |
-| `SKILL.md` | The workflow, plus `engine.js` (quiz, flashcards, mistakes, final), `engine.css` and `check_lab.py`, which Claude copies out of it |
+| `SKILL.md` | The workflow |
+| `assets/engine.js` | The lab engine: quiz, written answers, practice problems, games, flashcards, mistakes, sheet and final |
+| `assets/engine.css` | The engine's stylesheet, which each lab restyles to match its look |
+| `scripts/check_lab.py` | The checker every lab passes before it's published |
 | `tests/run.py` | Runs all the tests |
 | `tests/sample/lab.html` | A sample lab (Operating Systems, CPU scheduling) written the way the skill says |
 | `tests/flow_test.py` | Clicks through every part of a built lab |
@@ -56,7 +59,7 @@ Claude has all of this in its own workspace. To build labs elsewhere you need Py
 
 ## Tested
 
-`python3 tests/run.py` copies the engine out of SKILL.md with the skill's own command, builds the sample lab, then checks that:
+`python3 tests/run.py` copies the engine with the skill's own command, builds the sample lab, then checks that:
 
 - `check_lab.py` passes it, browser check included
 - 31 feature checks pass: quiz scoring, mistakes clearing after two right answers, keys 1 to 6 and Enter, practice problems with two tries, written answers with and without Check with Claude, steps, the game, reveal cards, flashcards with spaced repetition, the final and the sheet
