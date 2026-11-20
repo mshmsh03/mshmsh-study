@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test Lab</title>
+<style>.wide{width:900px;height:20px;background:#ccc}</style></head>
+<body>
+<nav><a href="#topic-1">1</a> <a href="#flashcards">Cards</a> <a href="#final">Final</a></nav>
+<section class="view" id="topic-1"><h2>Topic one has some text here</h2>
+<svg viewBox="0 0 300 100" width="300" height="100"><text x="10" y="50" font-size="16">Overlapping label</text><text x="14" y="52" font-size="16">Another label</text><text x="260" y="30" font-size="16">Clipped label text</text></svg>
+<div id="q1"></div><button id="boom">Boom</button></section>
+<section class="view" id="flashcards" hidden><h2>Flashcards view with enough text</h2><div class="wide"></div><button>Flip</button></section>
+<section class="view" id="final" hidden></section>
+<script type="application/json" id="lab-data">
+{"title":"Test","sources":[{"id":"","name":"test.pdf","pages":10,"skip":[1]}],
+ "topics":[{"key":"t1","title":"One"},{"key":"t2","title":"Two"}],
+ "quiz":{"t1":[["What is a <div> element?",["A box","A box","Inline","None of the above"],1,"Because.","3"],
+               ["Index out of range?",["a","b"],5,"x","4"],
+               ["Long correct?",["Short","Tiny","This correct option is very much longer than every other one"],2,"y","22"],
+               ["Bad ref?",["a","b","c"],0,"z","p5"]]},
+ "cards":[["t1","Throughput","Jobs finished per unit time.","5"],["t1","Throughput","dup","5"],["t3","Orphan topic?","x","5"],
+          ["t2","Why is the back long?","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","6"]],
+ "written":{"t2":[["Explain X.",["only one point"],"model","6"]]},
+ "games":[{"id":"g1","choices":["A","B"],"items":[["item","C"]]}],
+ "reveal":{"r1":[["Is it?","maybe","ans","7"]]}}
+</script>
+<script id="lab-gen">var GEN={t2:[{title:"good",ref:"6",make:function(r){var a=r.int(1,9);return{q:"2x"+a+"?",ans:2*a,tol:0,steps:["2*"+a]}}},{title:"bad",ref:"6",make:function(r){var a=r.int(0,3);return{q:"1/"+a,ans:1/(a-a),steps:["x"]}}}]};</script>
+<script>{
+function route(){var h=location.hash.slice(1)||'topic-1';document.querySelectorAll('section.view').forEach(function(s){s.hidden=s.id!==h})}
+addEventListener('hashchange',route);route();
+document.getElementById('boom').addEventListener('click',function(){undefinedFunctionCall()});
+}</script>
+</body></html>

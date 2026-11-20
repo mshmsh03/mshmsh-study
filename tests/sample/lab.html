@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OS Ch5 Study Lab</title>
+<style>:root{color-scheme:light dark;--bg:light-dark(#f6f4ee,#13161b);--surface:light-dark(#fff,#1c2027);--ink:light-dark(#15171c,#ebe8e1);--muted:light-dark(#5b5f67,#a2a6ad);--line:light-dark(#d9d5ca,#323743);--accent:light-dark(#1d5bcc,#7ea9ff);--hl:light-dark(#fff0a0,#5a4a00);--good-strong:#12704a;--bad-strong:#b3342d;--warn-strong:#8a5d00}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,sans-serif;overflow-x:clip}
+header{padding:20px max(4vw,16px) 8px}h1{font-size:clamp(26px,5vw,40px);line-height:1.05;margin:0}
+nav{position:sticky;top:0;z-index:2;display:flex;gap:6px;overflow-x:auto;padding:8px max(4vw,16px);background:var(--bg);border-bottom:1px solid var(--line)}
+nav a{flex:none;padding:10px 14px;border:1px solid var(--line);border-radius:99px;color:var(--ink);text-decoration:none}
+main{padding:16px max(4vw,16px) 48px;max-width:980px}.plate{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0}.fig{overflow-x:auto}
+/*ENGINE_CSS*/</style></head><body>
+<header><h1>Operating Systems · Chapter 5 Study Lab</h1><p class="muted">CPU scheduling. Every answer shows its slide.</p><p>Tonight: <a href="#sheet">Sheet</a>, <a href="#topic-1">topic quizzes</a>, <a href="#mistakes">Mistakes</a>, <a href="#final">Final</a></p><div id="pips"></div></header>
+<nav><a href="#topic-1">1 Basics</a><a href="#topic-2">2 FCFS and SJF</a><a href="#cards">Flashcards</a><a href="#mistakes">Mistakes</a><a href="#sheet">Sheet</a><a href="#final">Final</a></nav>
+<main>
+<section class="view" id="topic-1"><p class="tag">Topic 1</p><h2>Scheduling basics</h2><p>What the scheduler optimizes and how we measure it.</p><p class="flag">Slide 9 is a diagram I couldn't read, so check it.</p>
+ <div class="plate"><p><mark>Turnaround = completion − arrival</mark>; <mark>waiting = turnaround − burst</mark>.</p><div data-reveal="r1"></div></div>
+ <div class="plate"><h3>Maximize or minimize?</h3><div data-game="g1"></div></div>
+ <div class="plate"><h3>Quiz</h3><div data-quiz="t1"></div></div>
+</section>
+<section class="view" id="topic-2" hidden><p class="tag">Topic 2</p><h2>FCFS and SJF</h2><p>Arrival order versus shortest burst.</p>
+ <figure class="plate fig" data-steps><ol class="caps" hidden><li>P1 (24 ms) runs first.</li><li>P2 waits 24 ms, then runs 3 ms.</li><li>P3 waits 27 ms. It's 17 ms on average.</li></ol>
+  <svg viewBox="0 0 600 120" width="600" height="120" role="img" aria-label="FCFS Gantt chart">
+   <g data-from="1"><rect x="20" y="30" width="400" height="40" fill="#1f5fd1"/><text x="220" y="56" fill="#fff" text-anchor="middle" font-size="16">P1</text></g>
+   <g data-from="2"><rect x="420" y="30" width="60" height="40" fill="#12704a"/><text x="450" y="56" fill="#fff" text-anchor="middle" font-size="16">P2</text></g>
+   <g data-from="3"><rect x="480" y="30" width="60" height="40" fill="#8a5d00"/><text x="510" y="56" fill="#fff" text-anchor="middle" font-size="16">P3</text></g>
+   <g fill="currentColor" font-size="13"><text x="20" y="92">0</text><text x="412" y="92">24</text><text x="474" y="92">27</text><text x="532" y="92">30</text></g>
+  </svg></figure>
+ <div class="plate"><h3>Practice</h3><div data-gen="t2"></div></div>
+ <div class="plate"><h3>Written</h3><div data-written="t2"></div></div>
+ <div class="plate"><h3>Quiz</h3><div data-quiz="t2"></div></div>
+</section>
+<section class="view" id="cards" hidden><h2>Flashcards</h2><div id="deck"></div></section>
+<section class="view" id="mistakes" hidden><h2>Mistakes</h2><div data-quiz="mistakes"></div></section>
+<section class="view" id="sheet" hidden><h2>Sheet</h2><div id="sheetbox"></div></section>
+<section class="view" id="final" hidden><h2>Final challenge</h2><div data-quiz="final"></div></section>
+</main>
+<script type="application/json" id="lab-data">{
+ "title": "Operating Systems · Chapter 5 Study Lab",
+ "sources": [
+  {
+   "id": "",
+   "name": "OS_Ch5_CPU_Scheduling.pdf",
+   "pages": 20,
+   "skip": [
+    1,
+    20
+   ]
+  }
+ ],
+ "topics": [
+  {
+   "key": "t1",
+   "title": "Scheduling basics"
+  },
+  {
+   "key": "t2",
+   "title": "FCFS and SJF"
+  }
+ ],
+ "quiz": {
+  "t1": [
+   [
+    "Which component gives the CPU to the process the short-term scheduler picked?",
+    [
+     "Dispatcher",
+     "Long-term scheduler",
+     "Interrupt handler",
+     "Medium-term scheduler"
+    ],
+    0,
+    "The dispatcher does the switch; the short-term scheduler only chooses.",
+    "4"
+   ],
+   [
+    "Turnaround time is measured from…",
+    [
+     "arrival to completion",
+     "arrival to first response",
+     "first response to completion",
+     "dispatch to completion"
+    ],
+    0,
+    "Turnaround = completion − arrival. Arrival to first response is <b>response time</b>.",
+    "6"
+   ],
+   [
+    "Waiting time equals…",
+    [
+     "turnaround − burst",
+     "completion − burst − turnaround",
+     "response − arrival",
+     "burst − arrival"
+    ],
+    0,
+    "Waiting time is the time spent in the ready queue: turnaround minus burst.",
+    "6-7"
+   ],
+   [
+    "Throughput counts…",
+    [
+     "processes completed per time unit",
+     "time from arrival to completion",
+     "percentage of time the CPU is busy",
+     "time until the first response"
+    ],
+    0,
+    "Throughput is jobs per unit time; the CPU-busy percentage is utilization.",
+    "5"
+   ],
+   [
+    "Preemptive scheduling can take the CPU away from a running process.",
+    [
+     "True",
+     "False"
+    ],
+    0,
+    "Preemptive = the OS can interrupt a running process.",
+    "8"
+   ],
+   [
+    "Which criterion should be <b>minimized</b>?",
+    [
+     "Waiting time",
+     "Throughput",
+     "CPU utilization",
+     "Number of completed jobs"
+    ],
+    0,
+    "Maximize utilization and throughput; minimize turnaround, waiting and response time.",
+    "5"
+   ]
+  ],
+  "t2": [
+   [
+    "FCFS is…",
+    [
+     "non-preemptive",
+     "preemptive",
+     "preemptive only with priorities",
+     "the same as round robin"
+    ],
+    0,
+    "FCFS keeps the CPU until the burst ends.",
+    "10"
+   ],
+   [
+    "Short processes stuck behind one long process is called…",
+    [
+     "the convoy effect",
+     "starvation",
+     "aging",
+     "thrashing"
+    ],
+    0,
+    "Convoy effect is the FCFS problem; starvation belongs to priority scheduling.",
+    "11"
+   ],
+   [
+    "Preemptive SJF is also called…",
+    [
+     "shortest-remaining-time-first",
+     "round robin",
+     "priority with aging",
+     "multilevel queue"
+    ],
+    0,
+    "SRTF preempts when a new process has a shorter remaining time.",
+    "15"
+   ],
+   [
+    "Why is SJF hard to use exactly?",
+    [
+     "The next CPU burst length is not known in advance",
+     "It needs a time quantum",
+     "It always causes the convoy effect",
+     "It cannot run on one CPU"
+    ],
+    0,
+    "SJF needs the next burst length, so it is estimated, for example with exponential averaging.",
+    "16"
+   ],
+   [
+    "For processes that all arrive at time 0, which gives the minimum average waiting time?",
+    [
+     "SJF",
+     "FCFS",
+     "Round robin",
+     "LIFO"
+    ],
+    0,
+    "SJF is optimal for average waiting time for a given set of processes.",
+    "14"
+   ],
+   [
+    "Bursts 24, 3, 3 arrive at 0 in that order. FCFS average waiting time?",
+    [
+     "17",
+     "3",
+     "13",
+     "27"
+    ],
+    0,
+    "Waits are 0, 24 and 27, so the average is 51 / 3 = 17.",
+    "12"
+   ]
+  ]
+ },
+ "written": {
+  "t2": [
+   [
+    "Compare FCFS and SJF.",
+    [
+     "FCFS runs processes in arrival order; SJF runs the shortest next burst first",
+     "FCFS is non-preemptive; SJF can be either (preemptive SJF = SRTF)",
+     "SJF gives the minimum average waiting time; FCFS suffers the convoy effect",
+     "SJF needs the next burst length, which must be estimated"
+    ],
+    "FCFS serves processes in arrival order without preemption, so short jobs can wait behind a long one (the convoy effect). SJF picks the shortest next CPU burst, which minimizes average waiting time, but the burst length must be estimated; its preemptive form is SRTF.",
+    "10-16"
+   ]
+  ]
+ },
+ "cards": [
+  [
+   "t1",
+   "What does the dispatcher do?",
+   "Gives the CPU to the process the short-term scheduler chose.",
+   "4"
+  ],
+  [
+   "t1",
+   "What is dispatch latency?",
+   "The time the dispatcher takes to stop one process and start another.",
+   "4"
+  ],
+  [
+   "t1",
+   "Define turnaround time.",
+   "Completion time − arrival time.",
+   "6"
+  ],
+  [
+   "t1",
+   "What is response time?",
+   "Time from arrival until the first response.",
+   "7"
+  ],
+  [
+   "t1",
+   "Which scheduling criteria are maximized?",
+   "CPU utilization and throughput.",
+   "5"
+  ],
+  [
+   "t1",
+   "When can non-preemptive scheduling switch processes?",
+   "Only when the running process blocks or terminates.",
+   "8"
+  ],
+  [
+   "t1",
+   "What runs a CPU burst followed by an I/O burst?",
+   "Every process: execution alternates between CPU bursts and I/O bursts.",
+   "3"
+  ],
+  [
+   "t1",
+   "What happens in the ready queue?",
+   "Processes wait there for the CPU.",
+   "2"
+  ],
+  [
+   "t1",
+   "Who picks the next process from the ready queue?",
+   "The short-term (CPU) scheduler.",
+   "9"
+  ],
+  [
+   "t2",
+   "What is the convoy effect?",
+   "Short processes waiting behind one long process under FCFS.",
+   "11"
+  ],
+  [
+   "t2",
+   "What is SRTF?",
+   "Preemptive SJF: shortest remaining time first.",
+   "15"
+  ],
+  [
+   "t2",
+   "How is the next CPU burst predicted?",
+   "Exponential averaging of the previous bursts.",
+   "17"
+  ],
+  [
+   "t2",
+   "What does τ(n+1) = α·t(n) + (1 − α)·τ(n) compute?",
+   "The predicted next burst; α weighs the latest burst against the history.",
+   "18"
+  ],
+  [
+   "t2",
+   "What does α = 0 mean in exponential averaging?",
+   "Recent history counts for nothing; the prediction never changes.",
+   "19"
+  ],
+  [
+   "t2",
+   "Order of service in FCFS?",
+   "Arrival order.",
+   "10"
+  ],
+  [
+   "t2",
+   "Is SJF optimal for average waiting time?",
+   "Yes, for a given set of processes.",
+   "14"
+  ],
+  [
+   "t2",
+   "FCFS waits for bursts 24, 3, 3 in that order?",
+   "0, 24 and 27 (average 17).",
+   "12"
+  ],
+  [
+   "t2",
+   "Same bursts served as 3, 3, 24?",
+   "Waits 0, 3 and 6 (average 3).",
+   "13"
+  ]
+ ],
+ "games": [
+  {
+   "id": "g1",
+   "topic": "t1",
+   "choices": [
+    "Maximize",
+    "Minimize"
+   ],
+   "items": [
+    [
+     "CPU utilization",
+     "Maximize"
+    ],
+    [
+     "Throughput",
+     "Maximize"
+    ],
+    [
+     "Turnaround time",
+     "Minimize"
+    ],
+    [
+     "Waiting time",
+     "Minimize"
+    ],
+    [
+     "Response time",
+     "Minimize",
+     "Matters most for interactive systems."
+    ]
+   ]
+  }
+ ],
+ "reveal": {
+  "r1": [
+   [
+    "Can a non-preemptive scheduler switch when a process does I/O?",
+    "y",
+    "Yes: the process blocks, so the scheduler picks another.",
+    "8"
+   ],
+   [
+    "Does FCFS starve long jobs?",
+    "n",
+    "No: every job runs in arrival order. FCFS hurts short jobs (convoy effect).",
+    "11"
+   ]
+  ]
+ },
+ "traps": {
+  "t1": [
+   "Throughput (jobs per unit time) vs turnaround (time for one job).",
+   "Response time ends at the <b>first</b> response, not at completion."
+  ],
+  "t2": [
+   "Convoy effect = FCFS. Starvation = priority and SJF."
+  ]
+ },
+ "finalSize": 10
+}</script>
+<script id="lab-gen">var GEN = {
+  t2: [{
+    title: "FCFS average waiting time", ref: "12",
+    make: function (r) {
+      var n = r.int(3, 4), b = [], w = [], t = 0;
+      for (var i = 0; i < n; i++) b.push(r.int(2, 12));
+      for (var i = 0; i < n; i++) { w.push(t); t += b[i]; }
+      var sum = w.reduce(function (a, x) { return a + x; }, 0), avg = Math.round(sum / n * 100) / 100;
+      return {
+        q: "P1–P" + n + " arrive at time 0 in order with bursts " + b.join(", ") + " ms. FCFS average waiting time?",
+        ans: avg, tol: 0.01, unit: "ms",
+        steps: ["Each process waits for the bursts before it: " + w.map(function (x, i) { return "P" + (i + 1) + " = " + x; }).join(", "),
+                "Average = (" + w.join(" + ") + ") / " + n + " = " + avg + " ms"]
+      };
+    }
+  }]
+};</script>
+<script>/*ENGINE*/</script>
+</body></html>
